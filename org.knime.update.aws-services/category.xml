@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.knime.features.cloud.aws.mlservices" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>
+   <feature id="org.knime.features.cloud.aws.mlservices.source" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>
+   <feature id="org.knime.features.cloud.aws.dynamodb" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>   
+   <feature id="org.knime.features.cloud.aws.dynamodb.source" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>
+   <feature id="org.knime.features.cloud.aws.redshift" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>   
+   <feature id="org.knime.features.cloud.aws.redshift.source" version="0.0.0">
+       <category name="knime-aws-services" />
+   </feature>
+
+   <category-def name="knime-aws-services" label="Build artifacts from knime-aws-services">
+       <description>Build artifacts from knime-aws-services</description>
+   </category-def>
+</site>
