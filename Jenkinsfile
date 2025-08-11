@@ -45,7 +45,8 @@ try {
                     'knime-streaming', 
                     'knime-office365',
                     'knime-rest',
-                    'knime-xml'
+                    'knime-xml',
+                    'knime-aws-services'
                 ]
             ],
             sidecarContainers: [
