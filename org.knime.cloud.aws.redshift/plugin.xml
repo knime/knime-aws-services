@@ -30,6 +30,10 @@
             dbTypes="redshift"
             factory="org.knime.cloud.aws.redshift.connector2.utility.RedshiftAgentFactory"
             interface="org.knime.database.agent.writer.DBWriter"/>
+      <Agent
+            dbTypes="redshift"
+            factory="org.knime.cloud.aws.redshift.connector2.utility.RedshiftAgentFactory"
+            interface="org.knime.database.agent.ddl.DBStructureManipulator"/>
    </extension>
 
    <!-- Dialect -->
