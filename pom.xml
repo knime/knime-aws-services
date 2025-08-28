@@ -25,6 +25,7 @@
 		<module>org.knime.cloud.aws.mlservices</module>		
 		<module>org.knime.cloud.aws.redshift/lib/redshift/fetch_jars</module>
 		<module>org.knime.cloud.aws.redshift/lib/redshift/fetch_jars2</module>
+		<module>org.knime.cloud.aws.redshift/lib/redshift/fetch_jars3</module>
 		<module>org.knime.cloud.aws.redshift</module>		
 		<module>org.knime.cloud.aws.dynamodb</module>		
 		<module>org.knime.features.cloud.aws.mlservices</module>
