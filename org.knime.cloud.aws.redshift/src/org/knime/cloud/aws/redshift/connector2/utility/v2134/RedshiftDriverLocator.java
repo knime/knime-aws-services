@@ -42,14 +42,14 @@
  *  when such Node is propagated with or for interoperation with KNIME.
  * ------------------------------------------------------------------------
  */
-package org.knime.cloud.aws.redshift.connector2.utility.v2126;
+package org.knime.cloud.aws.redshift.connector2.utility.v2134;
 
 import java.util.Collections;
 
 import org.knime.cloud.aws.redshift.connector2.utility.RedshiftAbstractDriverLocator;
 
 /**
- * This class contains a Amazon Redshift driver definition for version 2.1.0.26.
+ * This class contains a Amazon Redshift driver definition for version 2.1.0.34.
  * The definition will be used by Eclipse extensions API to create a database driver instance.
  *
  * @author Tobias Koetter, KNIME GmbH, Konstanz, Germany
@@ -60,16 +60,11 @@ public class RedshiftDriverLocator extends RedshiftAbstractDriverLocator {
      * Default Constructor.
      */
     public RedshiftDriverLocator() {
-        super("2.1.0.26", Collections.singleton("lib/redshift/2.1.0.26/jdbc/redshift-jdbc42-2.1.0.26.jar"));
+        super("2.1.0.34", Collections.singleton("lib/redshift/2.1.0.34/jdbc/redshift-jdbc42-2.1.0.34.jar"));
     }
 
     @Override
     public String getDriverClassName() {
         return "com.amazon.redshift.Driver";
-    }
-
-    @Override
-    public boolean isDeprecated() {
-        return true;
     }
 }

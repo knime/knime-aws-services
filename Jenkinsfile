@@ -5,7 +5,7 @@ library "knime-pipeline@$BN"
 
 properties([
     pipelineTriggers([
-        upstream("aws/${env.BRANCH_NAME.replaceAll('/', '%2F')}")
+        upstream("knime-aws/${env.BRANCH_NAME.replaceAll('/', '%2F')}")
     ]),
     parameters(workflowTests.getConfigurationsAsParameters()),
     buildDiscarder(logRotator(numToKeepStr: '5')),
@@ -20,7 +20,7 @@ try {
 
     withEnv([ "KNIME_S3_COMPATIBLE_USER=AKIAIOSVODTN7",
               "KNIME_S3_COMPATIBLE_PASSWORD=wJalrXUtnXpiGh/7MDENG/bPxRfiCY" ]) {
-              
+
         workflowTests.runTests(
             dependencies: [
                 repositories: [
@@ -45,7 +45,8 @@ try {
                     'knime-streaming', 
                     'knime-office365',
                     'knime-rest',
-                    'knime-xml'
+                    'knime-xml',
+                    'knime-aws-services'
                 ]
             ],
             sidecarContainers: [
