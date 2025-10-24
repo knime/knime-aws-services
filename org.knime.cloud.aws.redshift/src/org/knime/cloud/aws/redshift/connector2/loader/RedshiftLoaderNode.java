@@ -77,6 +77,7 @@ import org.knime.database.model.DBTable;
 import org.knime.database.node.component.PreferredHeightPanel;
 import org.knime.database.node.io.load.DBLoaderNode2;
 import org.knime.database.node.io.load.DBLoaderNode2Factory;
+import org.knime.database.node.io.load.DBLoaderParameters;
 import org.knime.database.node.io.load.ExecutionParameters;
 import org.knime.database.node.io.load.impl.fs.ConnectedLoaderNode2;
 import org.knime.database.node.io.load.impl.fs.util.DBFileWriter;
@@ -93,14 +94,13 @@ import org.knime.filehandling.core.defaultnodesettings.filechooser.writer.Settin
  *
  * @author Tobias Koetter, KNIME GmbH, Konstanz, Germany
  */
-public class RedshiftLoaderNode
-extends ConnectedLoaderNode2<RedshiftLoaderNodeComponents, RedshiftLoaderNodeSettings>
-implements DBLoaderNode2Factory<RedshiftLoaderNodeComponents, RedshiftLoaderNodeSettings> {
+public class RedshiftLoaderNode extends ConnectedLoaderNode2<RedshiftLoaderNodeComponents, RedshiftLoaderNodeSettings>
+    implements DBLoaderNode2Factory<RedshiftLoaderNodeComponents, RedshiftLoaderNodeSettings> {
 
     private static final NodeLogger LOGGER = NodeLogger.getLogger(RedshiftLoaderNode.class);
 
-    private static final List<Charset> CHARSETS = unmodifiableList(asList(StandardCharsets.UTF_8,
-        StandardCharsets.UTF_16, StandardCharsets.UTF_16BE, StandardCharsets.UTF_16LE));
+    private static final List<Charset> CHARSETS = unmodifiableList(
+        asList(StandardCharsets.UTF_8, StandardCharsets.UTF_16, StandardCharsets.UTF_16BE, StandardCharsets.UTF_16LE));
 
     private static Box createBox(final boolean horizontal) {
         final Box box;
@@ -187,7 +187,7 @@ implements DBLoaderNode2Factory<RedshiftLoaderNodeComponents, RedshiftLoaderNode
         csvPanel.setBorder(BorderFactory.createTitledBorder(" CSV Settings "));
         advancedBox.add(csvPanel);
         final JPanel orcParquetPanel = createPanel();
-        orcParquetPanel .setBorder(BorderFactory.createTitledBorder(" ORC/Parquet Settings "));
+        orcParquetPanel.setBorder(BorderFactory.createTitledBorder(" ORC/Parquet Settings "));
         orcParquetPanel.add(cc.getChunkSizeComponent().getComponentPanel());
         orcParquetPanel.add(cc.getFileSizeComponent().getComponentPanel());
         advancedBox.add(orcParquetPanel);
@@ -275,8 +275,8 @@ implements DBLoaderNode2Factory<RedshiftLoaderNodeComponents, RedshiftLoaderNode
                 exec.setProgress("Loading data file into DB table...");
                 exec.checkCanceled();
                 session.getAgent(DBLoader.class).load(exec,
-                    new DBLoadTableFromFileParameters<>(DBLoaderMode.REMOTE_TEMPORARY_FILE, targetFileString,
-                    table, writer.getLoadParameter(customSettings)));
+                    new DBLoadTableFromFileParameters<>(DBLoaderMode.REMOTE_TEMPORARY_FILE, targetFileString, table,
+                        writer.getLoadParameter(customSettings)));
             }
         }
         // Output
@@ -291,5 +291,10 @@ implements DBLoaderNode2Factory<RedshiftLoaderNodeComponents, RedshiftLoaderNode
         super.loadDialogSettingsFrom(settings, specs, dialogComponents, customComponents);
         onFileFormatSelectionChange(customComponents);
         m_init = false;
+    }
+
+    @Override
+    public Class<? extends DBLoaderParameters> getParametersClass() {
+        return RedshiftLoaderNodeParameters.class;
     }
 }
