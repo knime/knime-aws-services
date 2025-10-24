@@ -56,6 +56,7 @@ import org.knime.cloud.aws.redshift.connector2.loader.writer.redshift.RedshiftOR
 import org.knime.cloud.aws.redshift.connector2.loader.writer.redshift.RedshiftParquetWriter;
 import org.knime.core.node.util.ButtonGroupEnumInterface;
 import org.knime.database.node.io.load.impl.fs.util.DBFileWriter;
+import org.knime.node.parameters.widget.choices.Label;
 
 /**
  * The intermediate file formats supported by the Snowflake data loader node.
@@ -69,17 +70,26 @@ import org.knime.database.node.io.load.impl.fs.util.DBFileWriter;
  */
 @SuppressWarnings("deprecation")
 public enum RedshiftLoaderFileFormat implements ButtonGroupEnumInterface {
-        /** CSV file format. */
-        CSV("CSV", "Comma-separated values", ".csv"),
-        /** Apache ORC file format. */
-        ORC("ORC", "Apache ORC", ".orc"),
-        /** Apache Parquet file format. */
+        /**
+         * Apache Parquet file format.
+         */
+        @Label(value = "Parquet", description = "Apache Parquet")
         PARQUET("Parquet", "Apache Parquet", ".parquet") {
             @Override
             public boolean isDefault() {
                 return true;
             }
-        };
+        },
+        /**
+         * CSV file format.
+         */
+        @Label(value = "CSV", description = "Comma-separated values")
+        CSV("CSV", "Comma-separated values", ".csv"),
+        /**
+         * Apache ORC file format.
+         */
+        @Label(value = "ORC", description = "Apache ORC")
+        ORC("ORC", "Apache ORC", ".orc");
 
     /** No compression flag which is available for all file formats. */
     public static final String NONE_COMPRESSION = "NONE";
