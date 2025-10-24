@@ -1,0 +1,571 @@
+{
+  "data" : {
+    "model" : {
+      "tableName" : {
+        "catalogName" : "",
+        "tableName" : "test"
+      },
+      "targetFolder" : {
+        "file" : {
+          "path" : {
+            "fsCategory" : "CONNECTED",
+            "path" : "/tobias.koetter-eu-west-1-temp/tmp/",
+            "timeout" : 10000,
+            "context" : {
+              "fsSpecifier" : "amazon-s3",
+              "fsToString" : "(CONNECTED, amazon-s3, /tobias.koetter-eu-west-1-temp/tmp/)"
+            }
+          }
+        },
+        "createMissingFolders" : false
+      },
+      "authorization" : "IAM_ROLE 'arn:aws:iam::730499008251:role/RedshiftCopyUnloadRole'",
+      "fileFormatSelection" : "PARQUET",
+      "compression" : "NONE",
+      "chunkSize" : 128,
+      "fileSize" : 1024,
+      "fileFormat" : {
+        "columnSeparator" : ",",
+        "missingValue" : "",
+        "quoteBegin" : "\"",
+        "quoteEnd" : "\"",
+        "quoteMode" : "STRINGS",
+        "quoteReplacement" : "",
+        "sepReplacePattern" : "",
+        "replaceSepInStrings" : false,
+        "writeColumnHeader" : false,
+        "writeRowHeader" : false,
+        "decimalSeparator" : ".",
+        "lineEndingMode" : "SYST",
+        "characterSet" : "UTF-8",
+        "scientificExtrema" : true
+      }
+    }
+  },
+  "schema" : {
+    "type" : "object",
+    "properties" : {
+      "model" : {
+        "type" : "object",
+        "properties" : {
+          "authorization" : {
+            "type" : "string",
+            "title" : "Authorization parameters",
+            "description" : "Such as IAM_ROLE 'arn:aws:iam::&lt;aws-account-id&gt;:role/&lt;role-name&gt;' or ACCESS_KEY_ID '&lt;access-key-id&gt;'  SECRET_ACCESS_KEY '&lt;secret-access-key&gt;' SESSION_TOKEN '&lt;temporary-token&gt;';",
+            "default" : ""
+          },
+          "chunkSize" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Chunk Size",
+            "description" : "Within file chunk size for ORC/Parquet files. <ul><li><b>ORC:</b> Within file Stripe size (rows)</li><li><b>Parquet:</b> Within file Row Group size (MB)</li></ul>",
+            "default" : 128
+          },
+          "compression" : {
+            "type" : "string",
+            "title" : "Compression",
+            "description" : "The compression method to use for staging files.",
+            "default" : "NONE"
+          },
+          "fileFormat" : {
+            "type" : "object",
+            "properties" : {
+              "characterSet" : {
+                "type" : "string",
+                "title" : "Character set",
+                "description" : "The character set used to encode the CSV file.",
+                "default" : "UTF-8"
+              },
+              "columnSeparator" : {
+                "type" : "string",
+                "title" : "Column separator",
+                "description" : "The character(s) used to separate columns in the CSV file.",
+                "default" : ","
+              },
+              "decimalSeparator" : {
+                "type" : "string",
+                "default" : "."
+              },
+              "lineEndingMode" : {
+                "oneOf" : [ {
+                  "const" : "SYST",
+                  "title" : "Syst"
+                }, {
+                  "const" : "LF",
+                  "title" : "Lf"
+                }, {
+                  "const" : "CRLF",
+                  "title" : "Crlf"
+                }, {
+                  "const" : "CR",
+                  "title" : "Cr"
+                } ],
+                "title" : "Line ending mode",
+                "description" : "The line ending characters used in the CSV file.",
+                "default" : "SYST"
+              },
+              "missingValue" : {
+                "type" : "string",
+                "title" : "Missing value pattern",
+                "description" : "The pattern that represents missing values in the CSV file.",
+                "default" : ""
+              },
+              "quoteBegin" : {
+                "type" : "string",
+                "title" : "Quote begin",
+                "description" : "The character(s) used to begin quoted strings in the CSV file.",
+                "default" : "\""
+              },
+              "quoteEnd" : {
+                "type" : "string",
+                "title" : "Quote end",
+                "description" : "The character(s) used to end quoted strings in the CSV file.",
+                "default" : "\""
+              },
+              "quoteMode" : {
+                "type" : "string",
+                "default" : "STRINGS"
+              },
+              "quoteReplacement" : {
+                "type" : "string",
+                "title" : "Quote replacement",
+                "description" : "The character(s) that replace quotes inside quoted strings in the CSV file.",
+                "default" : ""
+              },
+              "replaceSepInStrings" : {
+                "type" : "boolean",
+                "default" : false
+              },
+              "scientificExtrema" : {
+                "type" : "boolean",
+                "default" : true
+              },
+              "sepReplacePattern" : {
+                "type" : "string",
+                "default" : ""
+              },
+              "writeColumnHeader" : {
+                "type" : "boolean",
+                "default" : false
+              },
+              "writeRowHeader" : {
+                "type" : "boolean",
+                "default" : false
+              }
+            },
+            "default" : {
+              "columnSeparator" : ",",
+              "missingValue" : "",
+              "quoteBegin" : "\"",
+              "quoteEnd" : "\"",
+              "quoteMode" : "STRINGS",
+              "quoteReplacement" : "",
+              "sepReplacePattern" : "",
+              "replaceSepInStrings" : false,
+              "writeColumnHeader" : false,
+              "writeRowHeader" : false,
+              "decimalSeparator" : ".",
+              "lineEndingMode" : "SYST",
+              "characterSet" : "UTF-8",
+              "scientificExtrema" : true
+            }
+          },
+          "fileFormatSelection" : {
+            "oneOf" : [ {
+              "const" : "PARQUET",
+              "title" : "Parquet"
+            }, {
+              "const" : "CSV",
+              "title" : "CSV"
+            }, {
+              "const" : "ORC",
+              "title" : "ORC"
+            } ],
+            "title" : "File Format",
+            "description" : "The file format used to stage data before loading into Redshift.\n<ul>\n<li><b>Parquet</b>: Apache Parquet</li>\n<li><b>CSV</b>: Comma-separated values</li>\n<li><b>ORC</b>: Apache ORC</li>\n</ul>",
+            "default" : "PARQUET"
+          },
+          "fileSize" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "File Size",
+            "description" : "Split data into files of size for ORC/Parquet files. <ul><li><b>ORC:</b> Split data into files of size (rows)</li><li><b>Parquet:</b> Split data into files of size (MB)</li></ul>",
+            "default" : 1024
+          },
+          "messageFileSystemManagedByPort" : {
+            "type" : "object"
+          },
+          "tableName" : {
+            "type" : "object",
+            "properties" : {
+              "catalogName" : {
+                "type" : "string",
+                "title" : "Database name",
+                "description" : "The name of the database (or catalogue) to use.",
+                "default" : ""
+              },
+              "schemaName" : {
+                "type" : "string",
+                "title" : "Schema name",
+                "description" : "The database schema to read the table from. If not provided, the default schema of the database will be used.\n"
+              },
+              "tableName" : {
+                "type" : "string",
+                "title" : "Table name",
+                "description" : "Name of the database table to read data from. Must match the table name as it appears in the selected schema.\n",
+                "default" : ""
+              }
+            },
+            "default" : {
+              "catalogName" : "",
+              "tableName" : ""
+            }
+          },
+          "targetFolder" : {
+            "type" : "object",
+            "properties" : {
+              "createMissingFolders" : {
+                "type" : "boolean",
+                "title" : "Create missing folders",
+                "description" : "If enabled, missing folders in the specified path will be created automatically.",
+                "default" : false
+              },
+              "file" : {
+                "type" : "object",
+                "properties" : {
+                  "path" : {
+                    "type" : "object",
+                    "default" : {
+                      "fsCategory" : "LOCAL",
+                      "path" : "",
+                      "timeout" : 10000,
+                      "context" : {
+                        "fsToString" : "(LOCAL, )"
+                      }
+                    }
+                  }
+                },
+                "title" : "Target Folder",
+                "description" : "The target folder in the file system connection where the files will be staged to.",
+                "default" : {
+                  "path" : {
+                    "fsCategory" : "LOCAL",
+                    "path" : "",
+                    "timeout" : 10000,
+                    "context" : {
+                      "fsToString" : "(LOCAL, )"
+                    }
+                  }
+                }
+              }
+            },
+            "default" : {
+              "file" : {
+                "path" : {
+                  "fsCategory" : "LOCAL",
+                  "path" : "",
+                  "timeout" : 10000,
+                  "context" : {
+                    "fsToString" : "(LOCAL, )"
+                  }
+                }
+              },
+              "createMissingFolders" : false
+            }
+          }
+        }
+      }
+    }
+  },
+  "ui_schema" : {
+    "elements" : [ {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/tableName",
+      "options" : {
+        "format" : "dbTableChooser",
+        "dbConnectionError" : "No database is currently connected. To proceed, connect a database to the input port, or re-execute any upstream connector nodes.",
+        "validateSchema" : true,
+        "validateTable" : true
+      }
+    }, {
+      "type" : "Control",
+      "id" : "#/properties/model/properties/messageFileSystemManagedByPort",
+      "options" : {
+        "format" : "textMessage"
+      },
+      "providedOptions" : [ "message" ]
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/targetFolder/properties/file",
+      "options" : {
+        "fileSystems" : [ "CONNECTED" ],
+        "isWriter" : true,
+        "selectionMode" : "FOLDER",
+        "format" : "fileChooser"
+      }
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/targetFolder/properties/createMissingFolders",
+      "options" : {
+        "format" : "checkbox"
+      }
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/authorization"
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/fileFormatSelection"
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/compression",
+      "options" : {
+        "format" : "dropDown"
+      },
+      "providedOptions" : [ "possibleValues" ]
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/chunkSize",
+      "options" : {
+        "validation" : {
+          "max" : {
+            "errorMessage" : "The value must not exceed 2147483647.",
+            "parameters" : {
+              "isExclusive" : false,
+              "max" : 2.147483647E9
+            }
+          },
+          "min" : {
+            "errorMessage" : "The value must be at least 1.",
+            "parameters" : {
+              "isExclusive" : false,
+              "min" : 1.0
+            }
+          }
+        }
+      },
+      "rule" : {
+        "effect" : "SHOW",
+        "condition" : {
+          "scope" : "#/properties/model/properties/fileFormatSelection",
+          "schema" : {
+            "oneOf" : [ {
+              "const" : "ORC"
+            }, {
+              "const" : "PARQUET"
+            } ]
+          }
+        }
+      }
+    }, {
+      "type" : "Control",
+      "scope" : "#/properties/model/properties/fileSize",
+      "options" : {
+        "validation" : {
+          "max" : {
+            "errorMessage" : "Value too large to process without risking precision loss (> 9007199254740991).",
+            "parameters" : {
+              "isExclusive" : false,
+              "max" : 9.007199254740991E15
+            }
+          },
+          "min" : {
+            "errorMessage" : "The value must be at least 1.",
+            "parameters" : {
+              "isExclusive" : false,
+              "min" : 1.0
+            }
+          }
+        }
+      },
+      "rule" : {
+        "effect" : "SHOW",
+        "condition" : {
+          "scope" : "#/properties/model/properties/fileFormatSelection",
+          "schema" : {
+            "oneOf" : [ {
+              "const" : "ORC"
+            }, {
+              "const" : "PARQUET"
+            } ]
+          }
+        }
+      }
+    }, {
+      "label" : "CSV Format Settings",
+      "type" : "Section",
+      "options" : {
+        "isAdvanced" : true
+      },
+      "rule" : {
+        "effect" : "SHOW",
+        "condition" : {
+          "scope" : "#/properties/model/properties/fileFormatSelection",
+          "schema" : {
+            "oneOf" : [ {
+              "const" : "CSV"
+            } ]
+          }
+        }
+      },
+      "elements" : [ {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/columnSeparator"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/missingValue"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/quoteBegin"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/quoteEnd"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/quoteReplacement"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/lineEndingMode"
+      }, {
+        "type" : "Control",
+        "scope" : "#/properties/model/properties/fileFormat/properties/characterSet",
+        "options" : {
+          "format" : "dropDown"
+        },
+        "providedOptions" : [ "possibleValues" ]
+      } ]
+    } ]
+  },
+  "persist" : {
+    "type" : "object",
+    "properties" : {
+      "model" : {
+        "type" : "object",
+        "properties" : {
+          "tableName" : {
+            "configPaths" : [ [ "tableName", "table" ], [ "tableName", "schema" ], [ "tableName", "database" ] ]
+          },
+          "messageFileSystemManagedByPort" : { },
+          "targetFolder" : {
+            "type" : "object",
+            "properties" : {
+              "file" : {
+                "configPaths" : [ [ "path" ] ]
+              },
+              "createMissingFolders" : {
+                "configKey" : "create_missing_folders"
+              }
+            }
+          },
+          "authorization" : {
+            "configKey" : "authorization"
+          },
+          "fileFormatSelection" : { },
+          "compression" : {
+            "configKey" : "fileCompression"
+          },
+          "chunkSize" : {
+            "configKey" : "withinFileChunkSize"
+          },
+          "fileSize" : {
+            "configKey" : "fileSize"
+          },
+          "fileFormat" : {
+            "type" : "object",
+            "properties" : {
+              "columnSeparator" : {
+                "configKey" : "colSeparator"
+              },
+              "missingValue" : {
+                "configKey" : "missing"
+              },
+              "quoteBegin" : {
+                "configKey" : "quoteBegin"
+              },
+              "quoteEnd" : {
+                "configKey" : "quoteEnd"
+              },
+              "quoteMode" : {
+                "configKey" : "quoteMode"
+              },
+              "quoteReplacement" : {
+                "configKey" : "quoteReplacement"
+              },
+              "sepReplacePattern" : {
+                "configKey" : "sepReplacePattern"
+              },
+              "replaceSepInStrings" : {
+                "configKey" : "ReplSepInStrings"
+              },
+              "writeColumnHeader" : {
+                "configKey" : "writeColHeader"
+              },
+              "writeRowHeader" : {
+                "configKey" : "writeRowHeader"
+              },
+              "decimalSeparator" : {
+                "configKey" : "decimalSeparator"
+              },
+              "lineEndingMode" : {
+                "configKey" : "lineEndingMode"
+              },
+              "characterSet" : {
+                "configKey" : "charSet"
+              },
+              "scientificExtrema" : {
+                "configKey" : "scientificExtrema"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "initialUpdates" : [ {
+    "scope" : "#/properties/model/properties/compression",
+    "providedOptionName" : "possibleValues",
+    "values" : [ {
+      "indices" : [ ],
+      "value" : [ {
+        "id" : "NONE",
+        "text" : "NONE"
+      }, {
+        "id" : "SNAPPY",
+        "text" : "SNAPPY"
+      }, {
+        "id" : "GZIP",
+        "text" : "GZIP"
+      } ]
+    } ]
+  }, {
+    "scope" : "#/properties/model/properties/fileFormat/properties/characterSet",
+    "providedOptionName" : "possibleValues",
+    "values" : [ {
+      "indices" : [ ],
+      "value" : [ {
+        "id" : "UTF-8",
+        "text" : "UTF-8"
+      }, {
+        "id" : "UTF-16",
+        "text" : "UTF-16"
+      }, {
+        "id" : "UTF-16BE",
+        "text" : "UTF-16BE"
+      }, {
+        "id" : "UTF-16LE",
+        "text" : "UTF-16LE"
+      } ]
+    } ]
+  } ],
+  "globalUpdates" : [ {
+    "trigger" : {
+      "id" : "after-open-dialog"
+    },
+    "triggerInitially" : true,
+    "dependencies" : [ ]
+  }, {
+    "trigger" : {
+      "scope" : "#/properties/model/properties/fileFormatSelection"
+    },
+    "dependencies" : [ "#/properties/model/properties/fileFormatSelection" ]
+  } ]
+}
